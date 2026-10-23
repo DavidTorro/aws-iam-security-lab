@@ -1,0 +1,96 @@
+site_name: AWS IAM Security Lab
+site_description: Práctica de seguridad en AWS IAM resuelta como infraestructura como código con Terraform
+site_author: David Torró
+site_url: https://davidtorro.github.io/aws-iam-security-lab/
+repo_url: https://github.com/DavidTorro/aws-iam-security-lab
+repo_name: DavidTorro/aws-iam-security-lab
+edit_uri: ""
+
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.footer
+    - content.code.copy
+  icon:
+    logo: material/shield-lock
+    repo: fontawesome/brands/github
+  favicon: assets/favicon.svg
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/nav-toggle.js
+
+extra:
+  generator: false
+  # Datos de la portada del PDF
+  portada:
+    alumno: David Torró
+    modulo: Nube pública
+    centro: CIPFP Batoi
+    curso: 2º DAW B
+    profesor: Edu Sánchez Yago
+
+plugins:
+  - search:
+      lang: es
+  # El PDF solo se genera con ENABLE_PDF_EXPORT=1 para que mkdocs serve siga siendo rápido
+  - to-pdf:
+      enabled_if_env: ENABLE_PDF_EXPORT
+      output_path: pdf/aws-iam-security-lab.pdf
+      custom_template_path: pdf
+      cover_title: AWS IAM Security Lab
+      cover_subtitle: Gestión de identidades y políticas de acceso en AWS con Terraform
+      cover_logo: assets/favicon.svg
+      author: David Torró
+      toc_title: Índice
+      toc_level: 2
+      ordered_chapter_level: 2
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - def_list
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  # Permite incrustar los JSON de policies/ sin copiarlos a mano
+  - pymdownx.snippets:
+      base_path: [.]
+      check_paths: true
+
+nav:
+  - Inicio: index.md
+  - Entorno:
+      - AWS Academy: entorno/aws-academy.md
+      - Terraform: entorno/terraform.md
+      - Flujo de trabajo: entorno/flujo-de-trabajo.md
+  - Usuarios y grupos: usuarios-y-grupos.md
+  - Políticas:
+      - S3 de solo lectura: politicas/s3-readonly.md
+      - Operaciones EC2: politicas/ec2-ops.md
+      - EC2 restringido a región: politicas/ec2-region.md
+      - Acceso por horario: politicas/horario.md
+      - Hardening con condiciones: politicas/ec2-ops-hardened.md
+  - Auditoría: auditoria/simulador.md
+  - Decisiones: decisiones.md
+  - Conclusiones: conclusiones.md
