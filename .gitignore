@@ -1,0 +1,38 @@
+# Terraform: directorios locales y plugins descargados
+**/.terraform/
+
+# Estado: contiene ARNs e IDs de la cuenta, nunca se sube
+*.tfstate
+*.tfstate.*
+
+# Planes guardados y logs de crash
+*.tfplan
+crash.log
+crash.*.log
+
+# Variables locales con valores sensibles o propios de cada equipo
+*.auto.tfvars
+*.local.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI config local
+.terraformrc
+terraform.rc
+
+# Credenciales de AWS y claves SSH
+.aws/
+*.pem
+credentials
+
+# LocalStack
+.localstack/
+volume/
+
+# Sistema y editores
+.DS_Store
+.vscode/
+.idea/
+*.swp
