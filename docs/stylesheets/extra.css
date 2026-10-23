@@ -23,7 +23,7 @@
   padding: 0.4rem;
 }
 
-.md-header__source {
+.md-header__inner .md-header__source {
   order: 2;
   width: auto;
   margin-left: 0;
@@ -51,9 +51,18 @@
   mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9.5 8.5c0 .8-.7 1.5-1.5 1.5H7v2H5.5V9H8c.8 0 1.5.7 1.5 1.5zm5 2c0 .8-.7 1.5-1.5 1.5h-2.5V9H13c.8 0 1.5.7 1.5 1.5zm4-3H17v1h1.5V13H17v2h-1.5V9h3zm-6.5 0h1v3h-1zm-5 0h1v1H7z"/></svg>') center / contain no-repeat;
 }
 
-.md-source__icon {
-  margin-left: 0.4rem;
-  margin-right: 0.4rem;
+/* El icono de GitHub ocupa el mismo hueco que los botones de PDF y tema
+   Material añade márgenes con [dir=ltr], por eso los selectores son más específicos */
+.md-header .md-header__source .md-source__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  margin: 0.2rem;
+}
+
+.md-header .md-header__source .md-source__icon svg {
+  margin: 0;
 }
 
 .md-source__repository {
