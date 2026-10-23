@@ -60,9 +60,26 @@ Esto demuestra que hay protecciones específicas sobre los recursos internos del
 | Crear usuarios y grupos | Bloqueado | Desplegarlos en LocalStack |
 | Asignar políticas para probarlas | Bloqueado | Verificar con el simulador de IAM |
 
+## Comprobado con Terraform
+
+El ciclo completo se probó en AWS Academy con la política `daw-s3-readonly-policy`
+
+| Paso | Resultado | Llamadas a IAM |
+|---|---|---|
+| `terraform apply` | 2 recursos creados | `CreatePolicy`, `GetPolicy`, `GetPolicyVersion` |
+| Modificar el JSON y `terraform apply` | 1 añadido, 1 cambiado, 1 destruido | `DeletePolicy` y `CreatePolicy`, sin `CreatePolicyVersion` |
+| `terraform destroy` | 2 recursos destruidos | `DeletePolicy` |
+
+La simulación inicial queda confirmada: crear y borrar políticas está permitido, y el reemplazo evita la restricción sobre `CreatePolicyVersion`. Ninguna llamada intentó etiquetar la política
+
+## Otras restricciones encontradas
+
+| Acción | Dónde aparece | Consecuencia |
+|---|---|---|
+| `access-analyzer:ValidatePolicy` | Editor de políticas del simulador de IAM | La consola muestra un error al revisar el JSON, pero la simulación funciona porque usa `iam:SimulateCustomPolicy` |
+
 ## Pendiente de comprobar
 
-- Ciclo completo `plan → apply → modificar → destroy` con Terraform
 - Permisos sobre roles (`CreateRole`, `PassRole`), EC2 y S3
 - Restricciones de AWS Organizations (SCP) y límites propios de la sesión
 

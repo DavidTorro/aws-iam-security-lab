@@ -121,7 +121,7 @@ article.md-typeset details {
 }
 
 // Evitar cortes feos entre páginas
-article pre,
+// Los bloques de código pueden partirse: si son largos y no caben, dejarían media página en blanco
 article table,
 article .admonition {
   break-inside: avoid;
@@ -139,4 +139,17 @@ article section.md-typeset + section.md-typeset {
   page-break-before: auto;
   break-before: auto;
   margin-top: 1.5rem;
+}
+
+// Capturas del contenido, sin afectar al logo de la portada
+// La altura máxima evita que una captura alta salte de página y deje un hueco en blanco
+article.md-typeset img,
+article section.md-typeset img {
+  display: block;
+  max-width: 100%;
+  max-height: 12cm;
+  margin: 0.8rem auto;
+  border: 1px solid #d5dbe3;
+  border-radius: 6px;
+  break-inside: avoid;
 }
