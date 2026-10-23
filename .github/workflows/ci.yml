@@ -32,6 +32,31 @@ jobs:
       - name: Check formatting
         run: terraform fmt -check -recursive -diff
 
+  terraform-validate:
+    name: Terraform validate
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: [academy]
+    defaults:
+      run:
+        working-directory: envs/${{ matrix.env }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.17.0
+
+      # Sin backend ni credenciales: solo descarga el provider para validar la sintaxis y los tipos
+      - name: Init
+        run: terraform init -backend=false -input=false
+
+      - name: Validate
+        run: terraform validate
+
   mkdocs-build:
     name: MkDocs build
     runs-on: ubuntu-latest
