@@ -1,0 +1,22 @@
+version: 2
+
+updates:
+  # Versiones del provider AWS en entornos y módulos
+  - package-ecosystem: terraform
+    directories:
+      - /envs/*
+      - /modules/*
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore
+      include: scope
+
+  # Versiones de las actions usadas en los workflows
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci
+      include: scope
