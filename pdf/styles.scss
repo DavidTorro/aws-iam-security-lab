@@ -1,0 +1,142 @@
+// Estilos propios del PDF, se aplican después de los del plugin
+
+$orange: #ff9900;
+$ink: #232f3e;
+$muted: #64748b;
+
+// Portada
+article#doc-cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  .cover-band {
+    height: 1.2rem;
+    background: $orange;
+  }
+
+  .cover-main {
+    text-align: center;
+    padding: 0 3rem;
+
+    .cover-logo {
+      width: 9rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      color: $ink;
+      font-size: 34pt;
+      line-height: 1.2;
+      margin: 0;
+      border: none;
+    }
+
+    .cover-subtitle {
+      color: $muted;
+      font-size: 14pt;
+      margin-top: 1rem;
+    }
+  }
+
+  .cover-data {
+    align-self: center;
+    width: 70%;
+    margin-bottom: 3rem;
+    border-collapse: collapse;
+    font-size: 11pt;
+
+    th,
+    td {
+      padding: 0.45rem 0.8rem;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+    }
+
+    th {
+      width: 30%;
+      color: $orange;
+      font-weight: bold;
+    }
+
+    td {
+      color: $ink;
+    }
+  }
+}
+
+// Tamaño de lectura: Material deja el texto en torno a 9pt y las tablas en 7pt
+// Las subpáginas van en <section class="md-typeset"> dentro del article
+article.md-typeset,
+article section.md-typeset {
+  font-size: 10.5pt;
+  line-height: 1.55;
+}
+
+article.md-typeset pre code {
+  font-size: 8.5pt;
+}
+
+// Títulos del contenido con el acento naranja en lugar del rojo del plugin
+article h1 {
+  color: $ink;
+  font-weight: 600;
+  border-bottom: 2px solid $orange;
+  padding-bottom: 0.2rem;
+}
+
+article h2 {
+  color: $ink;
+  font-weight: 500;
+  border-bottom: 1px solid #ffd699;
+}
+
+article h3 {
+  color: $ink;
+  font-weight: 600;
+  border-bottom: none;
+}
+
+// Tablas del contenido con cabecera oscura
+article.md-typeset table:not([class]) {
+  font-size: 9.5pt;
+
+  th {
+    background: $ink;
+    color: #ffffff;
+  }
+}
+
+// Contenido que solo tiene sentido en la web, como el enlace de descarga del PDF
+.web-only {
+  display: none;
+}
+
+// Las cajas de aviso de Material quedan en 7pt
+article.md-typeset .admonition,
+article.md-typeset details {
+  font-size: 9.5pt;
+}
+
+// Evitar cortes feos entre páginas
+article pre,
+article table,
+article .admonition {
+  break-inside: avoid;
+}
+
+article h1,
+article h2,
+article h3 {
+  break-after: avoid;
+}
+
+// El plugin empieza cada subpágina en una hoja nueva y deja medias páginas en blanco
+// Solo los capítulos (article) empiezan página, las subpáginas siguen a continuación
+article section.md-typeset + section.md-typeset {
+  page-break-before: auto;
+  break-before: auto;
+  margin-top: 1.5rem;
+}

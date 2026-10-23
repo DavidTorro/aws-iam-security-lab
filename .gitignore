@@ -36,3 +36,8 @@ volume/
 .vscode/
 .idea/
 *.swp
+
+# MkDocs
+.venv/
+site/
+__pycache__/

@@ -1,0 +1,7 @@
+<svg width="128" height="128" viewBox="-12 -6 134 144" xmlns="http://www.w3.org/2000/svg">
+  <!-- escudo con cerradura, el mismo del banner -->
+  <path d="M55 0 L110 20 V62 C110 98 86 120 55 132 C24 120 0 98 0 62 V20 Z"
+        fill="#0f172a" stroke="#ff9900" stroke-width="9" stroke-linejoin="round"/>
+  <circle cx="55" cy="58" r="14" fill="#ff9900"/>
+  <path d="M47 64 L43 94 H67 L63 64 Z" fill="#ff9900"/>
+</svg>

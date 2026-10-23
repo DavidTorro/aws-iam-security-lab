@@ -1,0 +1,21 @@
+<article id="doc-cover">
+    <div class="cover-band"></div>
+
+    <div class="cover-main">
+        {% if cover_logo is defined %}
+            <img class="cover-logo" src="{{ cover_logo | to_url }}" alt="">
+        {% endif %}
+        <h1>{{ cover_title | e }}</h1>
+        <p class="cover-subtitle">{{ cover_subtitle | e }}</p>
+    </div>
+
+    {# Datos del alumno y del módulo definidos en extra.portada de mkdocs.yml #}
+    <table class="cover-data">
+        <tr><th>Alumno</th><td>{{ portada.alumno | e }}</td></tr>
+        <tr><th>Módulo</th><td>{{ portada.modulo | e }}</td></tr>
+        <tr><th>Centro</th><td>{{ portada.centro | e }}</td></tr>
+        <tr><th>Curso</th><td>{{ portada.curso | e }}</td></tr>
+        <tr><th>Profesor</th><td>{{ portada.profesor | e }}</td></tr>
+        <tr><th>Fecha</th><td>{{ now.strftime('%d/%m/%Y') }}</td></tr>
+    </table>
+</article>
