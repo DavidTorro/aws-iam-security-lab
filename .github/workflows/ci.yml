@@ -31,3 +31,29 @@ jobs:
       # Falla si algún .tf no está formateado, sin modificar nada
       - name: Check formatting
         run: terraform fmt -check -recursive -diff
+
+  mkdocs-build:
+    name: MkDocs build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      # WeasyPrint necesita Pango para generar el PDF
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0
+
+      - name: Install MkDocs
+        run: pip install -r requirements.txt
+
+      # --strict convierte los avisos (enlaces rotos, snippets que faltan) en errores
+      - name: Build site and PDF
+        run: mkdocs build --strict
+        env:
+          ENABLE_PDF_EXPORT: 1

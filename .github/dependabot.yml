@@ -12,6 +12,19 @@ updates:
       prefix: chore
       include: scope
 
+  # Versiones de MkDocs y sus plugins en requirements.txt
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore
+      include: scope
+    # MkDocs 2.0 rompe los plugins y el tema Material, nos quedamos en 1.x
+    ignore:
+      - dependency-name: mkdocs
+        versions: [">=2.0.0"]
+
   # Versiones de las actions usadas en los workflows
   - package-ecosystem: github-actions
     directory: /
