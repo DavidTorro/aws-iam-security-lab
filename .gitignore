@@ -1,6 +1,9 @@
 # Terraform: directorios locales y plugins descargados
 **/.terraform/
 
+# Los módulos no fijan versiones del provider: el lock file solo se sube en los entornos
+modules/**/.terraform.lock.hcl
+
 # Estado: contiene ARNs e IDs de la cuenta, nunca se sube
 *.tfstate
 *.tfstate.*

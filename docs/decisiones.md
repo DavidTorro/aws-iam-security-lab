@@ -34,6 +34,22 @@ La política de horario no concede permisos: solo deniega fuera de la ventana y 
 
 Los nombres de las políticas usan el prefijo `daw-` que fija el enunciado. La mención a `asix-ec2-ops-policy` en la ampliación se considera una errata
 
+## Permisos de los grupos
+
+Cada grupo recibe solo las políticas que necesita su función. Desarrolladores consulta S3 y lanza instancias en `us-east-1`, Operaciones arranca y para servidores con las restricciones de región y horario, y Auditoria usa la política gestionada `SecurityAudit`, que permite revisar la configuración de seguridad sin leer el contenido de los datos
+
+## Usuarios y grupos como datos
+
+La relación entre usuarios y grupos se escribe como un mapa en `locals.tf` y los recursos se generan con `for_each`. Añadir un usuario o cambiarlo de grupo es editar una línea, sin tocar los recursos
+
+## Tests con mock del provider
+
+Los tests unitarios usan `mock_provider`, así que no necesitan AWS ni LocalStack y se ejecutan en el CI. Los tests contra el simulador necesitan credenciales de AWS Academy y se ejecutan en local
+
+## Capturas del simulador web
+
+El simulador web nuevo ignora `aws:RequestedRegion` y `aws:CurrentTime` en el modo de políticas personalizadas y muestra como permitidas acciones que se deberían denegar. Las capturas de esos casos se sustituyeron por los tests de Terraform, que consultan el mismo simulador por API y sí aplican las condiciones
+
 ## Documentación como código
 
 La memoria se escribe en Markdown dentro del repositorio, se publica con MkDocs en GitHub Pages y se exporta a PDF con `mkdocs-to-pdf`. Los JSON de las políticas se incrustan desde `policies/`, de modo que la documentación muestra siempre el código real
