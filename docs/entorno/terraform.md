@@ -32,7 +32,9 @@ modules/iam-policy/         crea una política IAM y la reemplaza al cambiar
 modules/policy-simulation/  consulta el simulador de IAM
 envs/academy/               despliegue real en AWS Academy
 envs/academy/tests/         tests contra el simulador
-envs/localstack/            despliegue completo en LocalStack (pendiente)
+envs/localstack/            despliegue completo en LocalStack
+envs/localstack/tests/      tests unitarios de usuarios y grupos
+modules/iam-policy/tests/   tests unitarios del módulo
 docs/                       esta documentación
 ```
 
@@ -74,5 +76,41 @@ Antes de llamar a AWS, el módulo comprueba que
 - El nombre sigue el formato `daw-<nombre>-policy`
 - El documento es un JSON válido
 
-!!! info "En construcción"
-    Esta sección se completará a medida que se implementen los módulos y entornos
+- La política no supera los 6144 caracteres de IAM
+
+## Tests unitarios
+
+Además de los tests contra el simulador, el proyecto tiene tests unitarios que usan un **mock** del provider de AWS. No llaman a AWS ni a LocalStack, así que se ejecutan en el CI en cada pull request
+
+| Tests | Qué comprueban |
+|---|---|
+| `modules/iam-policy/tests` | Las validaciones de nombre, JSON y tamaño, y que la huella ignore los espacios del JSON |
+| `envs/localstack/tests` | Los grupos, los usuarios, las membresías, los permisos de cada grupo y la política de contraseñas |
+
+```hcl
+--8<-- "modules/iam-policy/tests/validation.tftest.hcl:44:53"
+```
+
+```text
+$ terraform test
+tests/validation.tftest.hcl... pass
+  run "valid_policy"... pass
+  run "revision_ignores_whitespace"... pass
+  run "name_without_prefix"... pass
+  run "name_without_suffix"... pass
+  run "invalid_json"... pass
+  run "policy_too_long"... pass
+
+Success! 6 passed, 0 failed.
+```
+
+## Integración continua
+
+Cada pull request ejecuta en GitHub Actions
+
+| Job | Qué hace |
+|---|---|
+| Terraform fmt | Comprueba el formato de todo el código |
+| Terraform validate | Valida la sintaxis y los tipos de los dos entornos |
+| Terraform test | Ejecuta los tests unitarios con mock |
+| MkDocs build | Genera la web y el PDF en modo estricto |
