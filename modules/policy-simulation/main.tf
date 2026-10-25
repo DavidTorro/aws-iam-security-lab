@@ -4,7 +4,7 @@ data "external" "simulation" {
   program = ["bash", "${path.module}/simulate.sh"]
 
   query = {
-    policy    = var.policy
+    policies  = jsonencode(var.policies)
     actions   = jsonencode(var.actions)
     resources = jsonencode(var.resource_arns)
     context = jsonencode([

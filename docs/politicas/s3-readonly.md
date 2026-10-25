@@ -33,7 +33,7 @@ El departamento de analítica necesita consultar los backups guardados en Amazon
 La política se despliega con el módulo `iam-policy` desde el entorno de AWS Academy
 
 ```hcl
---8<-- "envs/academy/main.tf"
+--8<-- "envs/academy/main.tf:1:8"
 ```
 
 ## Política desplegada en AWS

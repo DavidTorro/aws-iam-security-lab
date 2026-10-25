@@ -7,7 +7,7 @@ query="$(cat)"
 
 # El data source solo admite strings, así que las listas llegan codificadas en JSON
 request="$(jq '{
-  PolicyInputList: [.policy],
+  PolicyInputList: (.policies | fromjson),
   ActionNames: (.actions | fromjson),
   ResourceArns: (.resources | fromjson),
   ContextEntries: (.context | fromjson)
