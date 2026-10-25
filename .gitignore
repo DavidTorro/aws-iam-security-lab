@@ -34,6 +34,9 @@ credentials
 .localstack/
 volume/
 
+# Enunciados de la práctica: material del profesor, solo en local
+enunciados/
+
 # Sistema y editores
 .DS_Store
 .vscode/

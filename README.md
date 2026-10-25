@@ -98,3 +98,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 - **Verificación con Terraform:** el simulador web ignora las condiciones globales o aplica las SCP de Academy, así que los casos con región y horario se comprueban con `terraform test`
 
 Todas las decisiones y su motivo están en [Decisiones](https://davidtorro.github.io/aws-iam-security-lab/decisiones/)
+
+## Licencia
+
+Código bajo licencia [MIT](LICENSE)
