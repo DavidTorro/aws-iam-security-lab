@@ -48,7 +48,7 @@ Los tests unitarios usan `mock_provider`, así que no necesitan AWS ni LocalStac
 
 ## Capturas del simulador web
 
-El simulador web nuevo ignora `aws:RequestedRegion` y `aws:CurrentTime` en el modo de políticas personalizadas y muestra como permitidas acciones que se deberían denegar. Las capturas de esos casos se sustituyeron por los tests de Terraform, que consultan el mismo simulador por API y sí aplican las condiciones
+El simulador web nuevo ignora `aws:RequestedRegion` y `aws:CurrentTime` en el modo de políticas personalizadas y muestra como permitidas acciones que se deberían denegar. El simulador antiguo (policysim.aws.amazon.com) sí lee las condiciones, pero aplica las SCP de AWS Organizations de la cuenta de Academy y lo deniega todo, incluso lo que debería estar permitido. Las capturas de esos casos se sustituyeron por los tests de Terraform, que consultan el mismo simulador por API y sí aplican las condiciones
 
 ## Documentación como código
 
