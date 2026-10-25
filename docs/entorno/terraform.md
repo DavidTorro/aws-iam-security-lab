@@ -24,16 +24,19 @@ Las restricciones de AWS Academy son iguales para las dos herramientas: lo que l
 !!! note "LocalStack"
     La edición gratuita de LocalStack permite crear recursos IAM pero no evalúa los permisos. La comprobación de permisos se hace siempre con el simulador de IAM
 
-## Estructura prevista
+## Estructura
 
 ```text
-policies/        documentos JSON de las políticas
-modules/         módulos reutilizables de Terraform
-envs/academy/    despliegue real en AWS Academy
-envs/localstack/ despliegue completo en LocalStack
-tests/           tests unitarios y de simulación
-docs/            esta documentación
+policies/                   documentos JSON y plantillas (.tftpl) de las políticas
+modules/iam-policy/         crea una política IAM y la reemplaza al cambiar
+modules/policy-simulation/  consulta el simulador de IAM
+envs/academy/               despliegue real en AWS Academy
+envs/academy/tests/         tests contra el simulador
+envs/localstack/            despliegue completo en LocalStack (pendiente)
+docs/                       esta documentación
 ```
+
+Las políticas con horario son plantillas: Terraform las rellena con `templatefile` y la ventana del día indicado en `terraform.tfvars`
 
 ## Módulo `iam-policy`
 

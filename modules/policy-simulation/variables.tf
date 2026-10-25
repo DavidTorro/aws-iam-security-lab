@@ -1,10 +1,11 @@
-variable "policy" {
-  description = "Documento JSON de la política que se simula"
-  type        = string
+# Varias políticas se evalúan juntas, como un usuario que las tuviera todas adjuntas
+variable "policies" {
+  description = "Documentos JSON de las políticas que se simulan"
+  type        = list(string)
 
   validation {
-    condition     = can(jsondecode(var.policy))
-    error_message = "La política debe ser un documento JSON válido"
+    condition     = length(var.policies) > 0 && alltrue([for policy in var.policies : can(jsondecode(policy))])
+    error_message = "Hay que indicar al menos una política y todas deben ser documentos JSON válidos"
   }
 }
 
