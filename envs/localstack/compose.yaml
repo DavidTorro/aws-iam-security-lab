@@ -1,0 +1,10 @@
+# LocalStack en local: docker compose up -d desde esta carpeta
+services:
+  localstack:
+    # Versión fija para que el entorno sea reproducible
+    image: localstack/localstack:4.4
+    ports:
+      - "127.0.0.1:4566:4566"
+    environment:
+      # Solo IAM y STS, que es lo que usa la práctica
+      - SERVICES=iam,sts
