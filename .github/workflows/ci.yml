@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        env: [academy]
+        env: [academy, localstack]
     defaults:
       run:
         working-directory: envs/${{ matrix.env }}
